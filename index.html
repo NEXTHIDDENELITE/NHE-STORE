@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHE STORE - ELITE DIGITAL GATEWAY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #030305;
+            --bg-panel: rgba(15, 15, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+            
+            --accent-cyan: #00f0ff;
+            --accent-purple: #bd00ff;
+            --accent-gold: #ffb800;
+            --accent-green: #00ff00;
+            --accent-red: #ff3366;
+            --accent-discord: #5865F2;
+            
+            --glow-cyan: rgba(0, 240, 255, 0.3);
+            --glow-purple: rgba(189, 0, 255, 0.3);
+            
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; font-family: 'Rajdhani', sans-serif; background-color: var(--bg-deep);
+            color: var(--text-main); overflow-x: hidden; overflow-y: hidden; 
+            background-image: radial-gradient(circle at 15% 50%, var(--glow-purple), transparent 30%), radial-gradient(circle at 85% 30%, var(--glow-cyan), transparent 30%);
+            background-attachment: fixed;
+            
+            /* Anti-Copy System */
+            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+
+        #cursor-glow {
+            position: fixed; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+            border-radius: 50%; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); mix-blend-mode: screen; transition: width 0.3s, height 0.3s;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- Navbar --- */
+        .navbar {
+            background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 20px 60px; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            border-bottom: 1px solid var(--glass-border); box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        .brand-logo { font-size: 2.2rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+        .brand-logo span { color: var(--accent-cyan); text-shadow: 0 0 15px var(--glow-cyan); }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-link { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; cursor: pointer; position: relative; transition: var(--transition-smooth); }
+        .nav-link:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .nav-link::before { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; background: var(--accent-cyan); transition: var(--transition-smooth); box-shadow: 0 0 10px var(--accent-cyan); }
+        .nav-link:hover::before { width: 100%; }
+
+        /* --- Hero Section --- */
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px 0; position: relative; }
+        
+        .server-status { display: flex; align-items: center; gap: 10px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); padding: 8px 25px; border-radius: 30px; font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 25px; }
+        .ping-dot { width: 10px; height: 10px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); } }
+
+        .hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; margin: 0; line-height: 1.1; letter-spacing: 2px; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0, 240, 255, 0.2); }
+        .hero p { font-size: 1.3rem; font-weight: 500; color: var(--text-muted); max-width: 600px; margin: 20px auto 40px; letter-spacing: 1px; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; }
+
+        .btn { padding: 15px 35px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-smooth); font-family: 'Rajdhani', sans-serif; }
+        .btn-primary { background: var(--accent-cyan); color: #000; border: none; box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 5px 30px rgba(0, 240, 255, 0.6); }
+        .btn-secondary { background: transparent; color: #fff; border: 1px solid var(--accent-purple); }
+        .btn-secondary:hover { background: rgba(189, 0, 255, 0.1); border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(189, 0, 255, 0.3); transform: translateY(-3px); }
+
+        /* --- Scroll Animation (Bi-directional) --- */
+        .reveal { opacity: 0; transform: translateY(80px); transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Stats Section --- */
+        .stats-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .stat-box { background: linear-gradient(145deg, rgba(20,20,25,0.7), rgba(5,5,8,0.8)); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px 20px; text-align: center; backdrop-filter: blur(10px); transition: var(--transition-smooth); position: relative; overflow: hidden; }
+        .stat-box::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); transition: 0.5s; }
+        .stat-box:hover::before { left: 100%; }
+        .stat-box:hover { transform: translateY(-5px); border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .stat-number { font-size: 3rem; font-weight: 800; margin: 0; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-safe { background: linear-gradient(to right, #fff, var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(0, 255, 0, 0.3); }
+        .stat-text { font-size: 1.2rem; color: var(--text-muted); font-weight: 700; margin-top: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* --- Modules / Store Section --- */
+        .store-section { max-width: 1200px; margin: 50px auto 100px; padding: 40px 20px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 3rem; font-weight: 800; letter-spacing: 3px; margin: 0; text-transform: uppercase; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+
+        .card { background: linear-gradient(145deg, rgba(20,20,25,0.8) 0%, rgba(5,5,8,0.9) 100%); border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px; position: relative; overflow: hidden; transition: var(--transition-smooth); display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-15px); border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.15); }
+        .card-icon-wrap { width: 70px; height: 70px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: var(--accent-cyan); margin-bottom: 20px; transition: var(--transition-smooth); }
+        .card:hover .card-icon-wrap { background: var(--accent-cyan); color: #000; transform: rotate(-10deg); }
+        .card h3 { font-size: 1.8rem; font-weight: 800; margin: 0 0 10px 0; }
+        .card p { font-size: 1.1rem; color: var(--text-muted); margin: 0 0 15px 0; flex-grow: 1; }
+
+        .package-select { background: rgba(0,0,0,0.5); color: var(--text-main); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; width: 100%; outline: none; cursor: pointer; transition: var(--transition-smooth); }
+        .package-select:focus { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+        .package-select option { background: #15151b; color: #fff; }
+
+        .card-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--glass-border); }
+        .price { font-size: 1.8rem; font-weight: 800; color: var(--accent-gold); transition: 0.3s; }
+
+        /* Out of stock card styling */
+        .card.stock-out { opacity: 0.7; pointer-events: none; }
+        .card.stock-out:hover { transform: none; border-color: var(--glass-border); box-shadow: none; }
+        .card.stock-out .price { text-decoration: line-through; color: var(--text-muted); }
+        .btn-disabled { background: #1a1a20 !important; color: #555 !important; border: 1px solid #333 !important; cursor: not-allowed; box-shadow: none !important; }
+
+        /* --- Modals --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(3, 3, 5, 0.95); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition-smooth); }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        #countryModal { z-index: 99999; }
+        .modal-content { background: linear-gradient(145deg, rgba(20,20,25,0.95), rgba(5,5,8,0.98)); border: 1px solid var(--accent-cyan); border-radius: 20px; padding: 40px; width: 90%; max-width: 600px; text-align: center; position: relative; transform: translateY(50px) scale(0.9); transition: var(--transition-smooth); box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.1); }
+        .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
+        .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
+        .modal-content h2 { font-size: 2.2rem; margin-top: 0; color: var(--accent-cyan); letter-spacing: 2px; }
+        .modal-content p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; }
+
+        /* Country Grid */
+        .country-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .country-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; font-size: 1.3rem; font-weight: 700; color: var(--text-main); cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .country-btn:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); border-color: var(--accent-cyan); }
+
+        /* Support/Purchase Status Buttons */
+        .status-btn { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; border-radius: 12px; margin-bottom: 15px; font-size: 1.2rem; font-weight: 700; transition: var(--transition-smooth); border: 1px solid var(--glass-border); }
+        .status-btn.offline { background: rgba(255, 51, 102, 0.05); color: var(--text-muted); border-color: rgba(255, 51, 102, 0.2); cursor: not-allowed; }
+        .status-btn.offline .s-right { color: var(--accent-red); }
+        .status-btn.online { background: rgba(88, 101, 242, 0.1); color: #fff; border-color: var(--accent-discord); cursor: pointer; }
+        .status-btn.online:hover { background: var(--accent-discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); }
+        .status-btn.online .s-right { color: var(--accent-green); }
+        .status-btn.online:hover .s-right { color: #fff; }
+        .s-left { display: flex; align-items: center; gap: 12px; }
+
+        .toast { position: fixed; bottom: 30px; right: 30px; background: var(--bg-panel); border: 1px solid #00ff00; color: #fff; padding: 15px 25px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; z-index: 3000; transform: translateY(100px); opacity: 0; transition: 0.4s; display: flex; align-items: center; gap: 10px; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        footer { text-align: center; padding: 30px; background: rgba(0,0,0,0.6); border-top: 1px solid var(--glass-border); color: var(--text-muted); letter-spacing: 2px; }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px; flex-direction: column; gap: 15px; position: absolute; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero-buttons { flex-direction: column; }
+            .country-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-glow"></div>
+
+    <div id="countryModal" class="modal-overlay show">
+        <div class="modal-content">
+            <h2><i class="fa-solid fa-earth-asia"></i> SELECT REGION</h2>
+            <p>Please select your country to view local pricing and dashboard.</p>
+            <div class="country-grid">
+                <div class="country-btn" onclick="selectRegion('BD')">🇧🇩 BANGLADESH</div>
+                <div class="country-btn" onclick="selectRegion('IN')">🇮🇳 INDIA</div>
+                <div class="country-btn" onclick="selectRegion('PK')">🇵🇰 PAKISTAN</div>
+                <div class="country-btn" onclick="selectRegion('BR')">🇧🇷 BRAZIL</div>
+                <div class="country-btn" onclick="selectRegion('SG')">🇸🇬 SINGAPORE</div>
+                <div class="country-btn" onclick="selectRegion('ID')">🇮🇩 INDONESIA</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="purchaseModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-xmark close-modal" onclick="closePurchaseModal()"></i>
+            <h2 style="color: #fff;"><i class="fa-solid fa-cart-shopping" style="color: var(--accent-cyan);"></i> CHECKOUT STATUS</h2>
+            <p>Select an available gateway to complete your purchase.</p>
+            
+            <div class="status-btn offline">
+                <div class="s-left"><i class="fa-solid fa-envelope"></i> MAIL</div>
+                <div class="s-right">OFFLINE</div>
+            </div>
+
+            <a href="https://discord.gg/8JnHDy8Jya" target="_blank" style="text-decoration: none;">
+                <div class="status-btn online">
+                    <div class="s-left"><i class="fa-brands fa-discord"></i> DISCORD</div>
+                    <div class="s-right">ONLINE <i class="fa-solid fa-arrow-right" style="margin-left: 5px; font-size: 0.9rem;"></i></div>
+                </div>
+            </a>
+
+            <div class="status-btn offline">
+                <div class="s-left"><i class="fa-brands fa-telegram"></i> TELEGRAM</div>
+                <div class="s-right">OFFLINE</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="brand-logo">NHE<span>STORE</span></div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#modules" class="nav-link">Modules</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero reveal">
+        <div class="server-status">
+            <div class="ping-dot"></div>
+            SYSTEM ONLINE
+        </div>
+        <h1>NEXT HIDDEN ELITE<br>STORE</h1>
+        <p>Premium architectural access, bypass cores, and elite gaming utilities. Secure your environment today.</p>
+        <div class="hero-buttons">
+            <a href="#modules"><button class="btn btn-primary">EXPLORE MODULES</button></a>
+            <button class="btn btn-secondary" onclick="openPurchaseModal()"><i class="fa-brands fa-discord"></i> JOIN COMMUNITY</button>
+        </div>
+    </section>
+
+    <section class="stats-container">
+        <div class="stat-box reveal" style="transition-delay: 0s;">
+            <div class="stat-number">75+</div>
+            <div class="stat-text">Active Users</div>
+        </div>
+        <div class="stat-box reveal" style="transition-delay: 0.1s;">
+            <div class="stat-number">5+</div>
+            <div class="stat-text">Premium Tools</div>
+        </div>
+        <div class="stat-box reveal" style="transition-delay: 0.2s;">
+            <div class="stat-number">99%</div>
+            <div class="stat-text">Performance</div>
+        </div>
+        <div class="stat-box reveal" style="transition-delay: 0.3s;">
+            <div class="stat-number stat-safe">100%</div>
+            <div class="stat-text" style="color: var(--accent-green);">SAFE ANTI-BAN</div>
+        </div>
+    </section>
+
+    <section id="modules" class="store-section">
+        <div class="section-header reveal">
+            <h2>PREMIUM ARSENAL</h2>
+        </div>
+
+        <div class="grid-container">
+            <div class="card reveal" style="transition-delay: 0s;">
+                <div class="card-icon-wrap"><i class="fa-solid fa-fingerprint"></i></div>
+                <h3>UID BYPASS PRO</h3>
+                <p>Advanced identification masking and routing protocols for ultimate stealth.</p>
+                
+                <select id="uid-duration" class="package-select" onchange="updateUidPrice()">
+                    <option value="1month">1 Month Access</option>
+                    <option value="ob53">Full OB53 Update</option>
+                    <option value="lifetime">Lifetime Access</option>
+                </select>
+
+                <div class="card-bottom">
+                    <div class="price" id="uid-price-display">৳500</div>
+                    <button class="btn btn-primary" style="padding: 10px 20px; font-size: 1rem;" onclick="openPurchaseModal()">PURCHASE</button>
+                </div>
+            </div>
+
+            <div class="card reveal" style="transition-delay: 0.15s;">
+                <div class="card-icon-wrap" style="color: #ffb800;"><i class="fa-solid fa-gem"></i></div>
+                <h3 style="color: #ffb800;">PREMIUM PANEL</h3>
+                <p>Top-tier architectural injection. Full system override with zero compromise.</p>
+                <div style="margin-bottom: 20px; height: 42px;"></div>
+                <div class="card-bottom">
+                    <div class="price" id="panel-price-display">৳2500</div>
+                    <button class="btn btn-primary" style="padding: 10px 20px; font-size: 1rem; background: #ffb800;" onclick="openPurchaseModal()">PURCHASE</button>
+                </div>
+            </div>
+
+            <div class="card stock-out reveal" style="transition-delay: 0.3s;">
+                <div class="card-icon-wrap" style="color: #bd00ff;"><i class="fa-solid fa-robot"></i></div>
+                <h3>GLORY BOT V1</h3>
+                <p>Automated guild statistics tracker and honor manager system.</p>
+                <div style="margin-bottom: 20px; height: 42px;"></div>
+                <div class="card-bottom">
+                    <div class="price" id="bot-price-display">৳800</div>
+                    <button class="btn btn-disabled" style="padding: 10px 20px; font-size: 1rem;">STOCK OUT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="copyToast" class="toast">
+        <i class="fa-solid fa-shield-halved"></i> <span id="toast-msg">Action Processed!</span>
+    </div>
+
+    <footer>
+        &copy; 2026 NHE STORE • PREMIUM TERMINAL • 100% SECURE
+    </footer>
+
+    <script>
+        // --- Security & Anti-Copy System ---
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault(); showToast("Security: Right-click is disabled.", true);
+        });
+
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) { showToast("Security: Developer tools blocked.", true); return false; }
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) { showToast("Security: Inspector blocked.", true); return false; }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { showToast("Security: Source code viewing blocked.", true); return false; }
+        }
+
+        // --- Pricing Engine (Updated with Premium Panel) ---
+        let currentRegion = 'BD';
+
+        const regionData = {
+            'BD': { symbol: '৳', uid: { '1month': 500, 'ob53': 900, 'lifetime': 1400 }, panel: 2500, bot: 800 },
+            'IN': { symbol: '₹', uid: { '1month': 500, 'ob53': 800, 'lifetime': 1350 }, panel: 2000, bot: 700 },
+            'PK': { symbol: 'Rs ', uid: { '1month': 1200, 'ob53': 2200, 'lifetime': 3500 }, panel: 6500, bot: 2000 },
+            'BR': { symbol: 'R$ ', uid: { '1month': 25, 'ob53': 45, 'lifetime': 70 }, panel: 150, bot: 40 },
+            'SG': { symbol: 'S$ ', uid: { '1month': 6, 'ob53': 11, 'lifetime': 18 }, panel: 40, bot: 10 },
+            'ID': { symbol: 'Rp ', uid: { '1month': 70000, 'ob53': 130000, 'lifetime': 200000 }, panel: 350000, bot: 120000 }
+        };
+
+        function selectRegion(regionCode) {
+            currentRegion = regionCode;
+            document.getElementById('countryModal').classList.remove('show');
+            document.body.style.overflowY = 'auto'; // Unlock scrolling
+            showToast('Region Set & Dashboard Unlocked!');
+            updateAllPrices();
+        }
+
+        function updateAllPrices() {
+            updateUidPrice();
+            document.getElementById('panel-price-display').innerText = regionData[currentRegion].symbol + regionData[currentRegion].panel;
+            document.getElementById('bot-price-display').innerText = regionData[currentRegion].symbol + regionData[currentRegion].bot;
+        }
+
+        function updateUidPrice() {
+            const selectedDuration = document.getElementById('uid-duration').value;
+            const price = regionData[currentRegion].uid[selectedDuration];
+            document.getElementById('uid-price-display').innerText = regionData[currentRegion].symbol + price;
+        }
+
+        // --- Visual Effects & Scroll Animation ---
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        setTimeout(reveal, 500);
+
+        // --- Modals & Toasts ---
+        const purchaseModal = document.getElementById('purchaseModal');
+        
+        function openPurchaseModal() { purchaseModal.classList.add('show'); }
+        function closePurchaseModal() { purchaseModal.classList.remove('show'); }
+        
+        window.onclick = function(event) {
+            if (event.target == purchaseModal) closePurchaseModal();
+        }
+
+        let toastTimer;
+        function showToast(message, isWarning = false) {
+            const toast = document.getElementById('copyToast');
+            
+            if(isWarning) {
+                toast.style.borderColor = '#ff3366';
+                toast.style.color = '#ff3366';
+                toast.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <span id="toast-msg">${message}</span>`;
+            } else {
+                toast.style.borderColor = '#00ff00';
+                toast.style.color = '#ffffff';
+                toast.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <span id="toast-msg">${message}</span>`;
+            }
+
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    </script>
+</body>
+</html>
