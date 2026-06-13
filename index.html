@@ -1,407 +1,1224 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NHE STORE - ELITE DIGITAL GATEWAY</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="description" content="NHE Store - Next Hidden Elite. Premium storefront dashboard with elite product presentation.">
+		<title>NHE Store | Next Hidden Elite Dashboard</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #050608;
+			--bg-2: #0b0e14;
+			--panel: rgba(11, 14, 20, 0.72);
+			--panel-strong: rgba(16, 20, 30, 0.88);
+			--border: rgba(255, 255, 255, 0.08);
+			--text: #f4f7fb;
+			--muted: #9aa4b2;
+			--gold: #f7c948;
+			--gold-2: #ffdd7a;
+			--gold-deep: #b8860b;
+			--accent: #66e3ff;
+			--success: #3ee28a;
+			--radius-xl: 30px;
+			--radius-lg: 22px;
+			--radius-md: 18px;
+			--shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+			--shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.28);
+			--gold-glow: 0 0 0 1px rgba(247, 201, 72, 0.12), 0 24px 64px rgba(247, 201, 72, 0.12);
+		}
 
-    <style>
-        :root {
-            --bg-deep: #030305;
-            --bg-panel: rgba(15, 15, 20, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            
-            --text-main: #ffffff;
-            --text-muted: #8b92a5;
-            
-            --accent-cyan: #00f0ff;
-            --accent-purple: #bd00ff;
-            --accent-gold: #ffb800;
-            --accent-green: #00ff00;
-            --accent-red: #ff3366;
-            --accent-discord: #5865F2;
-            
-            --glow-cyan: rgba(0, 240, 255, 0.3);
-            --glow-purple: rgba(189, 0, 255, 0.3);
-            
-            --transition-smooth: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+		* {
+			box-sizing: border-box;
+		}
 
-        html { scroll-behavior: smooth; }
+		html {
+			scroll-behavior: smooth;
+		}
 
-        body {
-            margin: 0; font-family: 'Rajdhani', sans-serif; background-color: var(--bg-deep);
-            color: var(--text-main); overflow-x: hidden; overflow-y: hidden; 
-            background-image: radial-gradient(circle at 15% 50%, var(--glow-purple), transparent 30%), radial-gradient(circle at 85% 30%, var(--glow-cyan), transparent 30%);
-            background-attachment: fixed;
-            
-            /* Anti-Copy System */
-            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
-        }
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--text);
+			font-family: "Inter", system-ui, sans-serif;
+			background:
+				radial-gradient(circle at top left, rgba(247, 201, 72, 0.16), transparent 28%),
+				radial-gradient(circle at top right, rgba(102, 227, 255, 0.12), transparent 24%),
+				radial-gradient(circle at 50% 120%, rgba(255, 221, 122, 0.12), transparent 32%),
+				linear-gradient(180deg, #020305 0%, #080b10 32%, #050608 100%);
+			overflow-x: hidden;
+		}
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-deep); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+		body::after {
+			content: "";
+			position: fixed;
+			inset: auto 0 0;
+			height: 38vh;
+			pointer-events: none;
+			background: radial-gradient(circle at 50% 100%, rgba(247, 201, 72, 0.08), transparent 42%);
+		}
 
-        #cursor-glow {
-            position: fixed; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
-            border-radius: 50%; pointer-events: none; z-index: 9999;
-            transform: translate(-50%, -50%); mix-blend-mode: screen; transition: width 0.3s, height 0.3s;
-        }
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			background-image:
+				linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+			background-size: 48px 48px;
+			mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), transparent 88%);
+			opacity: 0.55;
+		}
 
-        a { text-decoration: none; color: inherit; }
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
 
-        /* --- Navbar --- */
-        .navbar {
-            background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            padding: 20px 60px; display: flex; justify-content: space-between; align-items: center;
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            border-bottom: 1px solid var(--glass-border); box-shadow: 0 5px 30px rgba(0,0,0,0.5);
-        }
+		.wrap {
+			width: min(1240px, calc(100% - 32px));
+			margin: 0 auto;
+		}
 
-        .brand-logo { font-size: 2.2rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
-        .brand-logo span { color: var(--accent-cyan); text-shadow: 0 0 15px var(--glow-cyan); }
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 30;
+			backdrop-filter: blur(18px);
+			background: rgba(4, 6, 10, 0.7);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		}
 
-        .nav-links { display: flex; gap: 40px; }
-        .nav-link { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; cursor: pointer; position: relative; transition: var(--transition-smooth); }
-        .nav-link:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .nav-link::before { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; background: var(--accent-cyan); transition: var(--transition-smooth); box-shadow: 0 0 10px var(--accent-cyan); }
-        .nav-link:hover::before { width: 100%; }
+		.topbar-inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 16px 0;
+		}
 
-        /* --- Hero Section --- */
-        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px 0; position: relative; }
-        
-        .server-status { display: flex; align-items: center; gap: 10px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); padding: 8px 25px; border-radius: 30px; font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 25px; }
-        .ping-dot { width: 10px; height: 10px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse 1.5s infinite; }
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			min-width: 0;
+		}
 
-        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); } }
+		.brand-mark {
+			width: 46px;
+			height: 46px;
+			border-radius: 16px;
+			background:
+				radial-gradient(circle at 30% 30%, #fff6c4 0%, #ffd95e 18%, #eab308 50%, #6b4e00 100%);
+			box-shadow: 0 14px 30px rgba(247, 201, 72, 0.35);
+			position: relative;
+			flex: 0 0 auto;
+		}
 
-        .hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; margin: 0; line-height: 1.1; letter-spacing: 2px; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0, 240, 255, 0.2); }
-        .hero p { font-size: 1.3rem; font-weight: 500; color: var(--text-muted); max-width: 600px; margin: 20px auto 40px; letter-spacing: 1px; }
-        .hero-buttons { display: flex; gap: 20px; justify-content: center; }
+		.brand-mark::after {
+			content: "N";
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.25rem;
+			font-weight: 700;
+			color: #120c00;
+			text-shadow: none;
+		}
 
-        .btn { padding: 15px 35px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-smooth); font-family: 'Rajdhani', sans-serif; }
-        .btn-primary { background: var(--accent-cyan); color: #000; border: none; box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 5px 30px rgba(0, 240, 255, 0.6); }
-        .btn-secondary { background: transparent; color: #fff; border: 1px solid var(--accent-purple); }
-        .btn-secondary:hover { background: rgba(189, 0, 255, 0.1); border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(189, 0, 255, 0.3); transform: translateY(-3px); }
+		.brand-text {
+			display: grid;
+			gap: 2px;
+			min-width: 0;
+		}
 
-        /* --- Scroll Animation (Bi-directional) --- */
-        .reveal { opacity: 0; transform: translateY(80px); transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+		.brand-kicker {
+			font-size: 0.72rem;
+			letter-spacing: 0.4em;
+			text-transform: uppercase;
+			color: var(--gold-2);
+			opacity: 0.88;
+		}
 
-        /* --- Stats Section --- */
-        .stats-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .stat-box { background: linear-gradient(145deg, rgba(20,20,25,0.7), rgba(5,5,8,0.8)); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px 20px; text-align: center; backdrop-filter: blur(10px); transition: var(--transition-smooth); position: relative; overflow: hidden; }
-        .stat-box::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); transition: 0.5s; }
-        .stat-box:hover::before { left: 100%; }
-        .stat-box:hover { transform: translateY(-5px); border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .stat-number { font-size: 3rem; font-weight: 800; margin: 0; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-safe { background: linear-gradient(to right, #fff, var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(0, 255, 0, 0.3); }
-        .stat-text { font-size: 1.2rem; color: var(--text-muted); font-weight: 700; margin-top: 10px; letter-spacing: 2px; text-transform: uppercase; }
+		.brand-title {
+			margin: 0;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: clamp(1.05rem, 2vw, 1.45rem);
+			letter-spacing: 0.06em;
+			line-height: 1;
+		}
 
-        /* --- Modules / Store Section --- */
-        .store-section { max-width: 1200px; margin: 50px auto 100px; padding: 40px 20px 0; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 3rem; font-weight: 800; letter-spacing: 3px; margin: 0; text-transform: uppercase; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+		.brand-title span {
+			color: var(--gold);
+		}
 
-        .card { background: linear-gradient(145deg, rgba(20,20,25,0.8) 0%, rgba(5,5,8,0.9) 100%); border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px; position: relative; overflow: hidden; transition: var(--transition-smooth); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-15px); border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.15); }
-        .card-icon-wrap { width: 70px; height: 70px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: var(--accent-cyan); margin-bottom: 20px; transition: var(--transition-smooth); }
-        .card:hover .card-icon-wrap { background: var(--accent-cyan); color: #000; transform: rotate(-10deg); }
-        .card h3 { font-size: 1.8rem; font-weight: 800; margin: 0 0 10px 0; }
-        .card p { font-size: 1.1rem; color: var(--text-muted); margin: 0 0 15px 0; flex-grow: 1; }
+		.nav-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			gap: 10px;
+		}
 
-        .package-select { background: rgba(0,0,0,0.5); color: var(--text-main); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; width: 100%; outline: none; cursor: pointer; transition: var(--transition-smooth); }
-        .package-select:focus { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
-        .package-select option { background: #15151b; color: #fff; }
+		.nav-pill {
+			padding: 10px 14px;
+			border-radius: 999px;
+			border: 1px solid var(--border);
+			background: rgba(255, 255, 255, 0.03);
+			color: var(--muted);
+			font-size: 0.92rem;
+			transition: 0.25s ease;
+		}
 
-        .card-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--glass-border); }
-        .price { font-size: 1.8rem; font-weight: 800; color: var(--accent-gold); transition: 0.3s; }
+		.nav-pill:hover {
+			color: #fff;
+			border-color: rgba(247, 201, 72, 0.28);
+			box-shadow: 0 0 0 1px rgba(247, 201, 72, 0.08) inset;
+			transform: translateY(-1px);
+		}
 
-        /* Out of stock card styling */
-        .card.stock-out { opacity: 0.7; pointer-events: none; }
-        .card.stock-out:hover { transform: none; border-color: var(--glass-border); box-shadow: none; }
-        .card.stock-out .price { text-decoration: line-through; color: var(--text-muted); }
-        .btn-disabled { background: #1a1a20 !important; color: #555 !important; border: 1px solid #333 !important; cursor: not-allowed; box-shadow: none !important; }
+			.hero {
+				padding: 26px 0 34px;
+		}
 
-        /* --- Modals --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(3, 3, 5, 0.95); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition-smooth); }
-        .modal-overlay.show { opacity: 1; visibility: visible; }
-        #countryModal { z-index: 99999; }
-        .modal-content { background: linear-gradient(145deg, rgba(20,20,25,0.95), rgba(5,5,8,0.98)); border: 1px solid var(--accent-cyan); border-radius: 20px; padding: 40px; width: 90%; max-width: 600px; text-align: center; position: relative; transform: translateY(50px) scale(0.9); transition: var(--transition-smooth); box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.1); }
-        .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
-        .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
-        .modal-content h2 { font-size: 2.2rem; margin-top: 0; color: var(--accent-cyan); letter-spacing: 2px; }
-        .modal-content p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; }
+			.hero-grid {
+				display: grid;
+				grid-template-columns: 1.35fr 0.65fr;
+			gap: 24px;
+			align-items: stretch;
+		}
 
-        /* Country Grid */
-        .country-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .country-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; font-size: 1.3rem; font-weight: 700; color: var(--text-main); cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .country-btn:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); border-color: var(--accent-cyan); }
+			.hero-main,
+			.hero-side,
+			.section-card,
+			.product-card,
+			.profile-card {
+				background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+			border: 1px solid var(--border);
+			border-radius: var(--radius-xl);
+			box-shadow: var(--shadow), var(--gold-glow);
+			backdrop-filter: blur(22px);
+		}
 
-        /* Support/Purchase Status Buttons */
-        .status-btn { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; border-radius: 12px; margin-bottom: 15px; font-size: 1.2rem; font-weight: 700; transition: var(--transition-smooth); border: 1px solid var(--glass-border); }
-        .status-btn.offline { background: rgba(255, 51, 102, 0.05); color: var(--text-muted); border-color: rgba(255, 51, 102, 0.2); cursor: not-allowed; }
-        .status-btn.offline .s-right { color: var(--accent-red); }
-        .status-btn.online { background: rgba(88, 101, 242, 0.1); color: #fff; border-color: var(--accent-discord); cursor: pointer; }
-        .status-btn.online:hover { background: var(--accent-discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); }
-        .status-btn.online .s-right { color: var(--accent-green); }
-        .status-btn.online:hover .s-right { color: #fff; }
-        .s-left { display: flex; align-items: center; gap: 12px; }
+		.hero-main {
+			padding: clamp(24px, 4vw, 40px);
+			position: relative;
+			overflow: hidden;
+		}
 
-        .toast { position: fixed; bottom: 30px; right: 30px; background: var(--bg-panel); border: 1px solid #00ff00; color: #fff; padding: 15px 25px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; z-index: 3000; transform: translateY(100px); opacity: 0; transition: 0.4s; display: flex; align-items: center; gap: 10px; }
-        .toast.show { transform: translateY(0); opacity: 1; }
+		.hero-main::before,
+		.hero-main::after {
+			content: "";
+			position: absolute;
+			border-radius: 999px;
+			filter: blur(2px);
+			pointer-events: none;
+		}
 
-        footer { text-align: center; padding: 30px; background: rgba(0,0,0,0.6); border-top: 1px solid var(--glass-border); color: var(--text-muted); letter-spacing: 2px; }
+		.hero-main::before {
+			width: 280px;
+			height: 280px;
+			right: -110px;
+			top: -110px;
+			background: radial-gradient(circle, rgba(247, 201, 72, 0.2), transparent 62%);
+		}
 
-        @media (max-width: 768px) {
-            .navbar { padding: 15px; flex-direction: column; gap: 15px; position: absolute; }
-            .hero h1 { font-size: 3.5rem; }
-            .hero-buttons { flex-direction: column; }
-            .country-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+		.hero-main::after {
+			width: 220px;
+			height: 220px;
+			left: -80px;
+			bottom: -100px;
+			background: radial-gradient(circle, rgba(102, 227, 255, 0.14), transparent 66%);
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 8px 12px;
+			border-radius: 999px;
+			background: rgba(247, 201, 72, 0.12);
+			border: 1px solid rgba(247, 201, 72, 0.22);
+			color: var(--gold-2);
+			font-size: 0.88rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.eyebrow::before {
+			content: "";
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: var(--success);
+			box-shadow: 0 0 18px rgba(62, 226, 138, 0.55);
+		}
+
+			.hero h1 {
+			margin: 16px 0 12px;
+			font-family: "Space Grotesk", sans-serif;
+				font-size: clamp(2.3rem, 6vw, 5.4rem);
+			line-height: 0.96;
+			letter-spacing: -0.06em;
+			text-wrap: balance;
+		}
+
+		.hero h1 span {
+			display: inline-block;
+			background: linear-gradient(135deg, #ffffff 0%, #f7c948 32%, #ffefb5 60%, #ffffff 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			text-shadow: 0 0 36px rgba(247, 201, 72, 0.18);
+		}
+
+		.hero-kpis {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 12px;
+			margin-top: 18px;
+		}
+
+		.kpi {
+			padding: 14px 16px;
+			border-radius: 18px;
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.07);
+		}
+
+		.kpi strong {
+			display: block;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1rem;
+			letter-spacing: -0.02em;
+		}
+
+		.kpi span {
+			display: block;
+			margin-top: 5px;
+			color: var(--muted);
+			font-size: 0.86rem;
+			line-height: 1.4;
+		}
+
+		.hero p {
+			margin: 0;
+			max-width: 68ch;
+			color: #cbd5e1;
+			font-size: 1.02rem;
+			line-height: 1.8;
+		}
+
+		.hero-actions {
+			margin-top: 24px;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+		}
+
+		.dashboard-banner {
+			margin: 18px 0 0;
+			padding: 14px 16px;
+			border-radius: 18px;
+			background: linear-gradient(135deg, rgba(247,201,72,0.14), rgba(255,255,255,0.04));
+			border: 1px solid rgba(247, 201, 72, 0.18);
+			color: #f9e8ab;
+			font-size: 0.92rem;
+			letter-spacing: 0.02em;
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 14px 18px;
+			border-radius: 16px;
+			border: 1px solid transparent;
+			font-weight: 700;
+			transition: 0.25s ease;
+			cursor: pointer;
+		}
+
+		.btn-primary {
+			color: #1b1300;
+			background: linear-gradient(135deg, #fff3b4 0%, #f7c948 34%, #c58a00 100%);
+			box-shadow: 0 18px 40px rgba(247, 201, 72, 0.2);
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 22px 52px rgba(247, 201, 72, 0.28);
+		}
+
+		.btn-ghost {
+			color: #f8fafc;
+			background: rgba(255, 255, 255, 0.04);
+			border-color: var(--border);
+		}
+
+		.btn-ghost:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 227, 255, 0.24);
+		}
+
+		.hero-stats {
+			margin-top: 30px;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 14px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.stat {
+			padding: 16px;
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.07);
+		}
+
+		.stat strong {
+			display: block;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.25rem;
+			color: #fff;
+		}
+
+		.stat span {
+			display: block;
+			margin-top: 4px;
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.hero-side {
+			padding: 20px;
+			display: grid;
+			gap: 16px;
+			align-content: start;
+		}
+
+		.mini-card {
+			padding: 18px;
+			border-radius: 22px;
+			background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.mini-card h3,
+		.section-title,
+		.profile-card h3 {
+			margin: 0;
+			font-family: "Space Grotesk", sans-serif;
+			letter-spacing: -0.03em;
+		}
+
+		.mini-card h3 {
+			font-size: 1.08rem;
+		}
+
+		.mini-card p {
+			margin: 8px 0 0;
+			color: var(--muted);
+			line-height: 1.7;
+			font-size: 0.94rem;
+		}
+
+		.pulse-row {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			color: #dce4ee;
+			font-size: 0.92rem;
+			margin-top: 14px;
+		}
+
+		.pulse {
+			width: 11px;
+			height: 11px;
+			border-radius: 50%;
+			background: var(--success);
+			box-shadow: 0 0 0 0 rgba(62, 226, 138, 0.6);
+			animation: pulse 1.8s infinite;
+		}
+
+		@keyframes pulse {
+			0% { box-shadow: 0 0 0 0 rgba(62, 226, 138, 0.55); }
+			70% { box-shadow: 0 0 0 16px rgba(62, 226, 138, 0); }
+			100% { box-shadow: 0 0 0 0 rgba(62, 226, 138, 0); }
+		}
+
+		.section {
+			padding: 18px 0 34px;
+		}
+
+		.section-header {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 16px;
+			margin-bottom: 18px;
+		}
+
+		.section-title {
+			font-size: clamp(1.5rem, 3vw, 2.15rem);
+		}
+
+		.surface-title {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			margin-bottom: 16px;
+		}
+
+		.surface-title small {
+			color: var(--muted);
+			font-size: 0.86rem;
+		}
+
+		.section-subtitle {
+			margin: 8px 0 0;
+			color: var(--muted);
+			max-width: 70ch;
+			line-height: 1.8;
+		}
+
+		.section-card {
+			padding: 18px;
+		}
+
+		.product-grid {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			gap: 18px;
+		}
+
+		.product-card {
+			grid-column: span 4;
+			overflow: hidden;
+			position: relative;
+			transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+			transform-style: preserve-3d;
+		}
+
+		.product-card:hover {
+			transform: translateY(-8px);
+			border-color: rgba(247, 201, 72, 0.22);
+			box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+		}
+
+		.product-card.featured {
+			border-color: rgba(247, 201, 72, 0.34);
+			box-shadow: 0 24px 90px rgba(247, 201, 72, 0.08), var(--shadow);
+		}
+
+		.product-card.featured::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(120deg, transparent 25%, rgba(255,255,255,0.28) 50%, transparent 75%);
+			transform: translateX(-120%);
+			transition: transform 0.7s ease;
+			pointer-events: none;
+			opacity: 0.45;
+		}
+
+		.product-card.featured:hover::before {
+			transform: translateX(120%);
+		}
+
+		.media {
+			position: relative;
+			aspect-ratio: 16 / 10;
+			overflow: hidden;
+			border-bottom: 1px solid rgba(255,255,255,0.06);
+			background: #0c1018;
+		}
+
+		.media img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			filter: saturate(1.04) contrast(1.02);
+			transform: scale(1.02);
+		}
+
+		.media .img-fallback {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			padding: 24px;
+			text-align: center;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.2rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			background: linear-gradient(135deg, rgba(247,201,72,0.18), rgba(255,255,255,0.05));
+			color: #fff7d5;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.media.is-missing .img-fallback {
+			opacity: 1;
+		}
+
+		.media.is-missing img {
+			opacity: 0;
+		}
+
+		.media::after {
+			content: "";
+			position: absolute;
+			inset: auto 0 0;
+			height: 70%;
+			background: linear-gradient(180deg, transparent 0%, rgba(5,6,8,0.18) 35%, rgba(5,6,8,0.9) 100%);
+		}
+
+		.badge-row {
+			position: absolute;
+			top: 14px;
+			left: 14px;
+			right: 14px;
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+			z-index: 1;
+		}
+
+		.badge,
+		.badge-soft {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 12px;
+			border-radius: 999px;
+			font-size: 0.8rem;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			backdrop-filter: blur(12px);
+		}
+
+		.badge {
+			color: #1a1100;
+			background: linear-gradient(135deg, #fff2b5 0%, #f7c948 46%, #c48f08 100%);
+			box-shadow: 0 10px 22px rgba(247, 201, 72, 0.18);
+		}
+
+		.badge-soft {
+			color: #eff8ff;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255,255,255,0.08);
+		}
+
+		.content {
+			padding: 18px;
+			display: grid;
+			gap: 14px;
+		}
+
+		.content h3 {
+			margin: 0;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.38rem;
+			letter-spacing: -0.03em;
+		}
+
+		.content p {
+			margin: 0;
+			color: var(--muted);
+			line-height: 1.75;
+			min-height: 3.5em;
+		}
+
+		.feature-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+		}
+
+		.feature-list span {
+			padding: 8px 10px;
+			border-radius: 999px;
+			background: rgba(255,255,255,0.05);
+			border: 1px solid rgba(255,255,255,0.06);
+			color: #dbe3ec;
+			font-size: 0.86rem;
+		}
+
+		.purchase-box {
+			display: grid;
+			gap: 12px;
+			padding-top: 4px;
+		}
+
+		.purchase-row {
+			display: grid;
+			grid-template-columns: 1.2fr 0.8fr;
+			gap: 10px;
+		}
+
+		.select,
+		.price-pill {
+			min-height: 48px;
+			border-radius: 14px;
+			border: 1px solid rgba(255,255,255,0.08);
+			background: rgba(255,255,255,0.04);
+			color: #fff;
+			padding: 0 14px;
+			font: inherit;
+		}
+
+		.price-pill {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 800;
+			letter-spacing: 0.02em;
+			background: linear-gradient(135deg, rgba(247, 201, 72, 0.14), rgba(255,255,255,0.03));
+		}
+
+		.select {
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			outline: none;
+			cursor: pointer;
+			color-scheme: dark;
+			background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%);
+			background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 12px) calc(1em + 2px);
+			background-size: 6px 6px, 6px 6px;
+			background-repeat: no-repeat;
+		}
+
+		.select option {
+			background: #0b0e14;
+			color: #f4f7fb;
+		}
+
+		.select option:checked,
+		.select option:hover {
+			background: #f7c948;
+			color: #120c00;
+		}
+
+		.buy-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			min-height: 50px;
+			border-radius: 16px;
+			border: 1px solid rgba(247, 201, 72, 0.25);
+			background: linear-gradient(135deg, #fff4bf 0%, #f7c948 35%, #b88100 100%);
+			color: #1b1300;
+			font-weight: 900;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			box-shadow: 0 18px 38px rgba(247, 201, 72, 0.18);
+		}
+
+		.buy-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 22px 46px rgba(247, 201, 72, 0.24);
+		}
+
+		.product-card.featured .buy-btn {
+			background: linear-gradient(135deg, #fff7d5 0%, #ffd76d 38%, #c58b00 100%);
+		}
+
+		.footer-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 18px;
+		}
+
+		.community-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 18px;
+		}
+
+		.community-links a {
+			flex: 1 1 180px;
+			min-height: 58px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 14px 18px;
+			border-radius: 18px;
+			border: 1px solid rgba(255,255,255,0.08);
+			background: rgba(255,255,255,0.04);
+			font-weight: 700;
+			color: #eef3f9;
+			transition: 0.25s ease;
+		}
+
+		.community-links a:hover {
+			transform: translateY(-2px);
+			border-color: rgba(247, 201, 72, 0.24);
+			box-shadow: 0 18px 34px rgba(0, 0, 0, 0.26);
+		}
+
+		.profiles {
+			display: grid;
+			gap: 14px;
+		}
+
+		.profile-card {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			padding: 16px;
+			transition: transform 0.25s ease, border-color 0.25s ease;
+		}
+
+		.profile-card:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 227, 255, 0.18);
+		}
+
+		.avatar {
+			width: 58px;
+			height: 58px;
+			border-radius: 18px;
+			object-fit: cover;
+			border: 1px solid rgba(255,255,255,0.08);
+			box-shadow: var(--shadow-soft);
+			flex: 0 0 auto;
+			background: linear-gradient(135deg, rgba(247,201,72,0.3), rgba(102,227,255,0.22));
+		}
+
+		.profile-avatar-wrap {
+			position: relative;
+			width: 58px;
+			height: 58px;
+			border-radius: 18px;
+			flex: 0 0 auto;
+			background: rgba(255,255,255,0.04);
+		}
+
+		.profile-avatar-wrap .avatar {
+			width: 100%;
+			height: 100%;
+		}
+
+		.profile-avatar-wrap .img-fallback {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			border-radius: inherit;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.2rem;
+			font-weight: 700;
+			background: linear-gradient(135deg, rgba(247,201,72,0.2), rgba(102,227,255,0.16));
+			color: #fff;
+			opacity: 0;
+		}
+
+		.profile-avatar-wrap.is-missing .img-fallback {
+			opacity: 1;
+		}
+
+		.profile-avatar-wrap.is-missing .avatar {
+			opacity: 0;
+		}
+
+		.profile-copy {
+			min-width: 0;
+			flex: 1;
+		}
+
+		.profile-copy strong {
+			display: block;
+			font-size: 1rem;
+			letter-spacing: 0.03em;
+		}
+
+		.profile-copy span {
+			display: block;
+			margin-top: 4px;
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.profile-link {
+			color: var(--gold-2);
+			font-size: 0.85rem;
+			font-weight: 800;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.footer-note {
+			margin-top: 20px;
+			color: #8c96a5;
+			font-size: 0.9rem;
+			text-align: center;
+			line-height: 1.8;
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		@media (max-width: 1060px) {
+			.hero-grid,
+			.footer-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-chip-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-top: 14px;
+			}
+
+			.hero-chip {
+				padding: 10px 12px;
+				border-radius: 999px;
+				border: 1px solid rgba(255,255,255,0.07);
+				background: rgba(255,255,255,0.04);
+				color: #dde5ef;
+				font-size: 0.84rem;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+			}
+
+			.hero-kpis {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.product-card {
+				grid-column: span 6;
+			}
+		}
+
+		@media (max-width: 720px) {
+			.wrap {
+				width: min(100% - 18px, 1240px);
+			}
+
+			.topbar-inner,
+			.section-header {
+				align-items: start;
+				flex-direction: column;
+			}
+
+			.nav-links {
+				justify-content: flex-start;
+			}
+
+			.hero {
+				padding-top: 24px;
+			}
+
+			.hero-stats,
+			.purchase-row {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-kpis {
+				grid-template-columns: 1fr 1fr;
+			}
+
+				.hero-chip-row {
+					gap: 8px;
+				}
+
+			.product-card {
+				grid-column: span 12;
+			}
+
+			.brand-kicker {
+				letter-spacing: 0.25em;
+			}
+		}
+	</style>
 </head>
 <body>
+	<header class="topbar">
+		<div class="wrap topbar-inner">
+			<a class="brand" href="#top" aria-label="NHE Store home">
+				<div class="brand-mark"></div>
+				<div class="brand-text">
+					<div class="brand-kicker">NHE STORE</div>
+					<h2 class="brand-title">NEXT <span>HIDDEN</span> ELITE</h2>
+				</div>
+			</a>
 
-    <div id="cursor-glow"></div>
+			<nav class="nav-links" aria-label="Primary navigation">
+				<a class="nav-pill" href="#products">Products</a>
+				<a class="nav-pill" href="#community">Community</a>
+				<a class="nav-pill" href="#owners">Owner</a>
+				<a class="nav-pill" href="https://discord.gg/FXF7d2Y7Z" target="_blank" rel="noreferrer">Discord</a>
+			</nav>
+		</div>
+	</header>
 
-    <div id="countryModal" class="modal-overlay show">
-        <div class="modal-content">
-            <h2><i class="fa-solid fa-earth-asia"></i> SELECT REGION</h2>
-            <p>Please select your country to view local pricing and dashboard.</p>
-            <div class="country-grid">
-                <div class="country-btn" onclick="selectRegion('BD')">🇧🇩 BANGLADESH</div>
-                <div class="country-btn" onclick="selectRegion('IN')">🇮🇳 INDIA</div>
-                <div class="country-btn" onclick="selectRegion('PK')">🇵🇰 PAKISTAN</div>
-                <div class="country-btn" onclick="selectRegion('BR')">🇧🇷 BRAZIL</div>
-                <div class="country-btn" onclick="selectRegion('SG')">🇸🇬 SINGAPORE</div>
-                <div class="country-btn" onclick="selectRegion('ID')">🇮🇩 INDONESIA</div>
-            </div>
-        </div>
-    </div>
+	<main id="top">
+		<section class="hero">
+			<div class="wrap hero-grid">
+				<div class="hero-main">
+					<span class="eyebrow">Elite storefront dashboard</span>
+					<h1><span>NHE STORE</span><br>Next Hidden Elite</h1>
+					<p>
+						
+					</p>
 
-    <div id="purchaseModal" class="modal-overlay">
-        <div class="modal-content">
-            <i class="fa-solid fa-xmark close-modal" onclick="closePurchaseModal()"></i>
-            <h2 style="color: #fff;"><i class="fa-solid fa-cart-shopping" style="color: var(--accent-cyan);"></i> CHECKOUT STATUS</h2>
-            <p>Select an available gateway to complete your purchase.</p>
-            
-            <div class="status-btn offline">
-                <div class="s-left"><i class="fa-solid fa-envelope"></i> MAIL</div>
-                <div class="s-right">OFFLINE</div>
-            </div>
+					<div class="hero-actions">
+						<a class="btn btn-primary" href="#products">Explore Products</a>
+						<a class="btn btn-ghost" href="#community">Join Community</a>
+					</div>
 
-            <a href="https://discord.gg/8JnHDy8Jya" target="_blank" style="text-decoration: none;">
-                <div class="status-btn online">
-                    <div class="s-left"><i class="fa-brands fa-discord"></i> DISCORD</div>
-                    <div class="s-right">ONLINE <i class="fa-solid fa-arrow-right" style="margin-left: 5px; font-size: 0.9rem;"></i></div>
-                </div>
-            </a>
+					<div class="dashboard-banner">Premium dashboard mode is active. Product visuals, pricing tiers, and profile links are arranged for an upscale storefront feel.</div>
 
-            <div class="status-btn offline">
-                <div class="s-left"><i class="fa-brands fa-telegram"></i> TELEGRAM</div>
-                <div class="s-right">OFFLINE</div>
-            </div>
-        </div>
-    </div>
+					<div class="hero-chip-row">
+						<span class="hero-chip">Gold UI</span>
+						<span class="hero-chip">Glass Panels</span>
+						<span class="hero-chip">Live Pricing</span>
+						<span class="hero-chip">Mobile Ready</span>
+					</div>
 
-    <nav class="navbar">
-        <div class="brand-logo">NHE<span>STORE</span></div>
-        <div class="nav-links">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#modules" class="nav-link">Modules</a>
-        </div>
-    </nav>
+					<div class="hero-kpis" aria-label="store metrics">
+						<div class="kpi"><strong>24/7</strong><span>Store access</span></div>
+						<div class="kpi"><strong>Fast</strong><span>Checkout flow</span></div>
+						<div class="kpi"><strong>Elite</strong><span>Visual polish</span></div>
+						<div class="kpi"><strong>Live</strong><span>Support ready</span></div>
+					</div>
 
-    <section id="home" class="hero reveal">
-        <div class="server-status">
-            <div class="ping-dot"></div>
-            SYSTEM ONLINE
-        </div>
-        <h1>NEXT HIDDEN ELITE<br>STORE</h1>
-        <p>Premium architectural access, bypass cores, and elite gaming utilities. Secure your environment today.</p>
-        <div class="hero-buttons">
-            <a href="#modules"><button class="btn btn-primary">EXPLORE MODULES</button></a>
-            <button class="btn btn-secondary" onclick="openPurchaseModal()"><i class="fa-brands fa-discord"></i> JOIN COMMUNITY</button>
-        </div>
-    </section>
+					<div class="hero-stats" aria-label="store highlights">
+						<div class="stat"><strong>99%</strong><span>Update rate</span></div>
+						<div class="stat"><strong>100%</strong><span>Anti-ban claim</span></div>
+						<div class="stat"><strong>Live</strong><span>Users online display</span></div>
+					</div>
+				</div>
 
-    <section class="stats-container">
-        <div class="stat-box reveal" style="transition-delay: 0s;">
-            <div class="stat-number">75+</div>
-            <div class="stat-text">Active Users</div>
-        </div>
-        <div class="stat-box reveal" style="transition-delay: 0.1s;">
-            <div class="stat-number">5+</div>
-            <div class="stat-text">Premium Tools</div>
-        </div>
-        <div class="stat-box reveal" style="transition-delay: 0.2s;">
-            <div class="stat-number">99%</div>
-            <div class="stat-text">Performance</div>
-        </div>
-        <div class="stat-box reveal" style="transition-delay: 0.3s;">
-            <div class="stat-number stat-safe">100%</div>
-            <div class="stat-text" style="color: var(--accent-green);">SAFE ANTI-BAN</div>
-        </div>
-    </section>
+				<aside class="hero-side">
+					<div class="mini-card">
+						<h3>Premium look, clean flow</h3>
+						<p>Gold accents, soft glow, layered panels, and bold typography give the store a high-end feel without clutter.</p>
+					</div>
+					<div class="mini-card">
+						<h3>Easy purchase flow</h3>
+						<p>Choose weekly, monthly, or lifetime access and the price updates instantly. Every card is ready with a clear buy action.</p>
+					</div>
+					<div class="mini-card">
+						<h3>Community first</h3>
+						<p>Discord, YouTube, owner, and admin links are placed together so visitors get trust signals quickly.</p>
+						<div class="pulse-row"><span class="pulse"></span>Online store mode ready</div>
+					</div>
+				</aside>
+			</div>
+		</section>
 
-    <section id="modules" class="store-section">
-        <div class="section-header reveal">
-            <h2>PREMIUM ARSENAL</h2>
-        </div>
+		<section class="section" id="products">
+			<div class="wrap section-card">
+				<div class="section-header">
+					<div>
+						<h2 class="section-title">Featured Tools</h2>
+						<div class="surface-title"><small>Three premium product surfaces with live pricing tiers and image slots</small></div>
+						<p class="section-subtitle">
+							Every card gets its own hero treatment. The top area is reserved for the product visual, while the lower section handles duration, pricing, and purchase.
+						</p>
+					</div>
+				</div>
 
-        <div class="grid-container">
-            <div class="card reveal" style="transition-delay: 0s;">
-                <div class="card-icon-wrap"><i class="fa-solid fa-fingerprint"></i></div>
-                <h3>UID BYPASS PRO</h3>
-                <p>Advanced identification masking and routing protocols for ultimate stealth.</p>
-                
-                <select id="uid-duration" class="package-select" onchange="updateUidPrice()">
-                    <option value="1month">1 Month Access</option>
-                    <option value="ob53">Full OB53 Update</option>
-                    <option value="lifetime">Lifetime Access</option>
-                </select>
+				<div class="product-grid">
+					<article class="product-card" data-product>
+						<div class="media">
+							<div class="badge-row">
+								<span class="badge">Stable Network</span>
+								<span class="badge-soft">UID BYPASS</span>
+							</div>
+							<img alt="UID Bypass preview" src="uidbypass.png" data-fallback-label="UID BYPASS">
+							<div class="img-fallback">UID BYPASS</div>
+						</div>
+						<div class="content">
+							<h3>UID BYPASS</h3>
+								<p>Stable network, fast sync, and a no-drop feel. The layout stays clean and focused for a premium utility-style product page.</p>
+							<div class="feature-list">
+								<span>Fast Sync</span><span>Stable Routing</span><span>No Drop</span>
+							</div>
+							<div class="purchase-box">
+								<div class="purchase-row">
+									<label class="sr-only" for="duration-uid">Duration</label>
+									<select class="select" id="duration-uid" data-duration>
+											<option value="week" data-price="1">1 Week - $1</option>
+											<option value="month" data-price="5" selected>1 Month - $5</option>
+											<option value="lifetime" data-price="20">Lifetime - $20</option>
+									</select>
+										<div class="price-pill" data-price-display>$5</div>
+								</div>
+								<a class="buy-btn" href="https://discord.com/channels/1335217174658420828/1509547524254470185/1509553195171450930" target="_blank" rel="noreferrer">BUY NOW</a>
+							</div>
+						</div>
+					</article>
 
-                <div class="card-bottom">
-                    <div class="price" id="uid-price-display">৳500</div>
-                    <button class="btn btn-primary" style="padding: 10px 20px; font-size: 1rem;" onclick="openPurchaseModal()">PURCHASE</button>
-                </div>
-            </div>
+					<article class="product-card featured" data-product>
+						<div class="media">
+							<div class="badge-row">
+								<span class="badge">Golden Effect</span>
+								<span class="badge-soft">NHE PANEL V2</span>
+							</div>
+							<img alt="NHE Panel V2 preview" src="nhepanel.png" data-fallback-label="NHE PANEL V2">
+							<div class="img-fallback">NHE PANEL V2</div>
+						</div>
+						<div class="content">
+							<h3>NHE PANEL V2</h3>
+							  <p>Golden hover treatment, premium highlights, and a stronger featured-card layout make this the main attraction.</p>
+							<div class="feature-list">
+								<span>Golden Hover</span><span>Elite Build</span><span>Pro Highlight</span>
+							</div>
+							<div class="purchase-box">
+								<div class="purchase-row">
+									<label class="sr-only" for="duration-panel-v2">Duration</label>
+									<select class="select" id="duration-panel-v2" data-duration>
+											<option value="week" data-price="2">1 Week - $2</option>
+											<option value="month" data-price="7" selected>1 Month - $7</option>
+											<option value="lifetime" data-price="25">Lifetime - $25</option>
+									</select>
+										<div class="price-pill" data-price-display>$7</div>
+								</div>
+								<a class="buy-btn" href="https://discord.com/channels/1335217174658420828/1509547524254470185/1509553195171450930" target="_blank" rel="noreferrer">BUY NOW</a>
+							</div>
+						</div>
+					</article>
 
-            <div class="card reveal" style="transition-delay: 0.15s;">
-                <div class="card-icon-wrap" style="color: #ffb800;"><i class="fa-solid fa-gem"></i></div>
-                <h3 style="color: #ffb800;">PREMIUM PANEL</h3>
-                <p>Top-tier architectural injection. Full system override with zero compromise.</p>
-                <div style="margin-bottom: 20px; height: 42px;"></div>
-                <div class="card-bottom">
-                    <div class="price" id="panel-price-display">৳2500</div>
-                    <button class="btn btn-primary" style="padding: 10px 20px; font-size: 1rem; background: #ffb800;" onclick="openPurchaseModal()">PURCHASE</button>
-                </div>
-            </div>
+					<article class="product-card" data-product>
+						<div class="media">
+							<div class="badge-row">
+								<span class="badge">Fast Delivery</span>
+								<span class="badge-soft">GUILD GLORY BOT</span>
+							</div>
+							<img alt="Guild Glory Bot preview" src="guildbot.png" data-fallback-label="GUILD GLORY BOT">
+							<div class="img-fallback">GUILD GLORY BOT</div>
+						</div>
+						<div class="content">
+							<h3>Guild Glory Bot</h3>
+								<p>An automation-style dashboard card with a crisp call to action, built for Guild level presentation.</p>
+							<div class="feature-list">
+									<span>Guild LV5</span><span>Guild LV6</span><span>Leaderboard</span>
+							</div>
+							<div class="purchase-box">
+								<div class="purchase-row">
+									<label class="sr-only" for="duration-guild">Duration</label>
+									<select class="select" id="duration-guild" data-duration>
+											<option value="lv5" data-price="3" selected>Guild LV5 - $3</option>
+											<option value="lv6" data-price="5">Guild LV6 - $5</option>
+											<option value="max" data-price="10">Guild Full Max - $10</option>
+											<option value="leaderboard" data-price="20">Guild Leaderboard - $20</option>
+									</select>
+										<div class="price-pill" data-price-display>$3</div>
+								</div>
+								<a class="buy-btn" href="https://discord.com/channels/1335217174658420828/1509547524254470185/1509553195171450930" target="_blank" rel="noreferrer">BUY NOW</a>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
 
-            <div class="card stock-out reveal" style="transition-delay: 0.3s;">
-                <div class="card-icon-wrap" style="color: #bd00ff;"><i class="fa-solid fa-robot"></i></div>
-                <h3>GLORY BOT V1</h3>
-                <p>Automated guild statistics tracker and honor manager system.</p>
-                <div style="margin-bottom: 20px; height: 42px;"></div>
-                <div class="card-bottom">
-                    <div class="price" id="bot-price-display">৳800</div>
-                    <button class="btn btn-disabled" style="padding: 10px 20px; font-size: 1rem;">STOCK OUT</button>
-                </div>
-            </div>
-        </div>
-    </section>
+		<section class="section" id="community">
+			<div class="wrap footer-grid">
+				<div class="section-card">
+					<h2 class="section-title">Join Community</h2>
+					  <p class="section-subtitle">YouTube, Discord, and direct purchase links are grouped to keep the buyer journey short and the trust signal strong.</p>
 
-    <div id="copyToast" class="toast">
-        <i class="fa-solid fa-shield-halved"></i> <span id="toast-msg">Action Processed!</span>
-    </div>
+					<div class="community-links">
+						<a href="https://www.youtube.com/@NextHiddenElite" target="_blank" rel="noreferrer">YouTube</a>
+						<a href="https://discord.gg/FXF7d2Y7Z" target="_blank" rel="noreferrer">Discord</a>
+						<a href="https://discord.com/channels/1335217174658420828/1509547524254470185/1509553195171450930" target="_blank" rel="noreferrer">Buy Now</a>
+					</div>
+				</div>
 
-    <footer>
-        &copy; 2026 NHE STORE • PREMIUM TERMINAL • 100% SECURE
-    </footer>
+				<div class="section-card" id="owners">
+					<h2 class="section-title">Owner & Admin</h2>
+					  <p class="section-subtitle">Discord profile-linked cards, so each click opens the correct profile directly.</p>
 
-    <script>
-        // --- Security & Anti-Copy System ---
-        document.addEventListener('contextmenu', event => {
-            event.preventDefault(); showToast("Security: Right-click is disabled.", true);
-        });
+					<div class="profiles">
+						<a class="profile-card" href="https://discordapp.com/users/1483917215349735674" target="_blank" rel="noreferrer">
+							<div class="profile-avatar-wrap">
+								<img class="avatar" alt="Owner profile" src="owner.png" data-fallback-label="O">
+								<div class="img-fallback">O</div>
+							</div>
+							<div class="profile-copy">
+								<strong>OWNER</strong>
+								<span>Click to open the owner Discord profile</span>
+							</div>
+							<div class="profile-link">Open</div>
+						</a>
 
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) { showToast("Security: Developer tools blocked.", true); return false; }
-            if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) { showToast("Security: Inspector blocked.", true); return false; }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { showToast("Security: Source code viewing blocked.", true); return false; }
-        }
+						<a class="profile-card" href="https://discordapp.com/users/1464861365645607027" target="_blank" rel="noreferrer">
+							<div class="profile-avatar-wrap">
+								<img class="avatar" alt="Admin profile" src="admin.png" data-fallback-label="A">
+								<div class="img-fallback">A</div>
+							</div>
+							<div class="profile-copy">
+								<strong>ADMIN</strong>
+								<span>Click to open the admin Discord profile</span>
+							</div>
+							<div class="profile-link">Open</div>
+						</a>
+					</div>
+				</div>
+			</div>
 
-        // --- Pricing Engine (Updated with Premium Panel) ---
-        let currentRegion = 'BD';
+			<div class="wrap">
+						<div class="footer-note">Copyright © NHE STORE GAMING CHATS. Spelling and labels have been normalized for a cleaner premium presentation.</div>
+			</div>
+		</section>
+	</main>
 
-        const regionData = {
-            'BD': { symbol: '৳', uid: { '1month': 500, 'ob53': 900, 'lifetime': 1400 }, panel: 2500, bot: 800 },
-            'IN': { symbol: '₹', uid: { '1month': 500, 'ob53': 800, 'lifetime': 1350 }, panel: 2000, bot: 700 },
-            'PK': { symbol: 'Rs ', uid: { '1month': 1200, 'ob53': 2200, 'lifetime': 3500 }, panel: 6500, bot: 2000 },
-            'BR': { symbol: 'R$ ', uid: { '1month': 25, 'ob53': 45, 'lifetime': 70 }, panel: 150, bot: 40 },
-            'SG': { symbol: 'S$ ', uid: { '1month': 6, 'ob53': 11, 'lifetime': 18 }, panel: 40, bot: 10 },
-            'ID': { symbol: 'Rp ', uid: { '1month': 70000, 'ob53': 130000, 'lifetime': 200000 }, panel: 350000, bot: 120000 }
-        };
+	<script>
+		const formatCurrency = (value) => `$${Number(value).toLocaleString('en-US')}`;
 
-        function selectRegion(regionCode) {
-            currentRegion = regionCode;
-            document.getElementById('countryModal').classList.remove('show');
-            document.body.style.overflowY = 'auto'; // Unlock scrolling
-            showToast('Region Set & Dashboard Unlocked!');
-            updateAllPrices();
-        }
+		const attachFallback = (image) => {
+			const container = image.parentElement;
+			image.addEventListener('error', () => {
+				container.classList.add('is-missing');
+			});
+			if (image.complete && image.naturalWidth === 0) {
+				container.classList.add('is-missing');
+			}
+		};
 
-        function updateAllPrices() {
-            updateUidPrice();
-            document.getElementById('panel-price-display').innerText = regionData[currentRegion].symbol + regionData[currentRegion].panel;
-            document.getElementById('bot-price-display').innerText = regionData[currentRegion].symbol + regionData[currentRegion].bot;
-        }
+		document.querySelectorAll('.media img, .profile-avatar-wrap img').forEach(attachFallback);
 
-        function updateUidPrice() {
-            const selectedDuration = document.getElementById('uid-duration').value;
-            const price = regionData[currentRegion].uid[selectedDuration];
-            document.getElementById('uid-price-display').innerText = regionData[currentRegion].symbol + price;
-        }
+		document.querySelectorAll('[data-product]').forEach((card) => {
+			const select = card.querySelector('[data-duration]');
+			const display = card.querySelector('[data-price-display]');
 
-        // --- Visual Effects & Scroll Animation ---
-        const glow = document.getElementById('cursor-glow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
+			const syncPrice = () => {
+				const option = select.options[select.selectedIndex];
+				display.textContent = formatCurrency(option.dataset.price || 0);
+			};
 
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                } else {
-                    reveals[i].classList.remove("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        setTimeout(reveal, 500);
-
-        // --- Modals & Toasts ---
-        const purchaseModal = document.getElementById('purchaseModal');
-        
-        function openPurchaseModal() { purchaseModal.classList.add('show'); }
-        function closePurchaseModal() { purchaseModal.classList.remove('show'); }
-        
-        window.onclick = function(event) {
-            if (event.target == purchaseModal) closePurchaseModal();
-        }
-
-        let toastTimer;
-        function showToast(message, isWarning = false) {
-            const toast = document.getElementById('copyToast');
-            
-            if(isWarning) {
-                toast.style.borderColor = '#ff3366';
-                toast.style.color = '#ff3366';
-                toast.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <span id="toast-msg">${message}</span>`;
-            } else {
-                toast.style.borderColor = '#00ff00';
-                toast.style.color = '#ffffff';
-                toast.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <span id="toast-msg">${message}</span>`;
-            }
-
-            toast.classList.add('show');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-    </script>
+			select.addEventListener('change', syncPrice);
+			syncPrice();
+		});
+	</script>
 </body>
 </html>
