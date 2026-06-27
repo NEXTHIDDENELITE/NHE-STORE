@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexora Panel | Next-Gen Dashboard</title>
+  <meta name="description" content="Premium troubleshooting and configuration dashboard for Nexora Corporation panels, APKs, emulators, and drivers." />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com https://youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; connect-src 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Ultra-Premium Glowing Loader -->
+  <div class="loader" id="loader" aria-busy="true">
+    <div class="loader__content">
+      <div class="loader__logo-wrapper">
+        <svg class="loader__logo-svg" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(150, 0, 255, 0.1)" stroke-width="2" />
+          <circle cx="40" cy="40" r="36" fill="none" stroke="url(#loaderGrad)" stroke-width="3" stroke-dasharray="226" stroke-dashoffset="226" stroke-linecap="round" class="loader__ring-progress" />
+          <defs>
+            <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#ec4899" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <img src="logo.png" alt="Nexora Corporation" class="loader__logo-img" />
+      </div>
+      <h2 class="loader__title">NEXORA<span>CORPORATION</span></h2>
+      <div class="loader__progress-bar">
+        <div class="loader__progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modern Dynamic Navbar -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo" data-link="home">
+        <img src="logo.png" alt="Nexora Logo" class="logo-img">
+        <span>NEXORA<span class="brand-badge">CORP</span></span>
+      </a>
+      
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#apk" data-link="apk">FF APK</a></li>
+        <li><a href="#emulator" data-link="emulator">Emulator</a></li>
+        <li><a href="#free-panel" data-link="free-panel">Free Panel</a></li>
+        <li><a href="#paid-sensi" data-link="paid-sensi">Paid Sensi</a></li>
+        <li><a href="#panel-driver" data-link="panel-driver">Requirements</a></li>
+        <li><a href="#other-issues" data-link="other-issues">Fixes</a></li>
+        <li class="mobile-only">
+          <a href="https://discord.gg/dVrff77YfK" target="_blank" class="btn btn--discord" data-config-key="discord_link">
+            <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.39,80.21a105.73,105.73,0,0,0,32.77,16.15,77.7,77.7,0,0,0,7.32-11.85,67.35,67.35,0,0,1-11.35-5.43c.95-.69,1.89-1.42,2.78-2.17a74.43,74.43,0,0,0,63.48,0c.89.75,1.83,1.48,2.78,2.17a67.43,67.43,0,0,1-11.35,5.43,77.91,77.91,0,0,0,7.32,11.85,105.56,105.56,0,0,0,32.8-16.15C129.58,52.41,124.4,28.85,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.43-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            Join Discord
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav__right">
+        <a href="https://discord.gg/dVrff77YfK" target="_blank" class="btn btn--discord" data-config-key="discord_link">
+          <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.39,80.21a105.73,105.73,0,0,0,32.77,16.15,77.7,77.7,0,0,0,7.32-11.85,67.35,67.35,0,0,1-11.35-5.43c.95-.69,1.89-1.42,2.78-2.17a74.43,74.43,0,0,0,63.48,0c.89.75,1.83,1.48,2.78,2.17a67.43,67.43,0,0,1-11.35,5.43,77.91,77.91,0,0,0,7.32,11.85,105.56,105.56,0,0,0,32.8-16.15C129.58,52.41,124.4,28.85,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.43-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+          Discord
+        </a>
+        <div class="status-indicator">
+          <span class="status-indicator__pulse"></span>
+          SYSTEM LIVE
+        </div>
+      </div>
+
+      <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main id="content">
+    
+    <!-- Hero Section -->
+    <section id="home" class="page">
+      <div class="hero-showcase">
+        <div class="hero-showcase__inner">
+          <div class="hero-showcase__content">
+            <div class="announcement-badge">
+              <span class="announcement-badge__new">NEW</span>
+              <span class="announcement-badge__text">Trusted by 4,500+ Active Players</span>
+            </div>
+            
+            <h1>Nexora <span class="text-gradient">Corporation</span><br><span class="text-sub">Simply Better.</span></h1>
+            <p class="hero-showcase__subtitle">Undetected, high-tier premium execution tools for FF MOD, Brazilian iOS Proxy, and Emulator Bypass optimization. Experience 24/7 hyper-responsive backend support.</p>
+
+            <div class="features-pill-grid">
+              <span class="feature-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Completely Undetected</span>
+              <span class="feature-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Instant Automated Delivery</span>
+              <span class="feature-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 24/7 Priority Support</span>
+            </div>
+
+            <div class="hero-showcase__actions">
+              <a href="https://www.Nexoragg.store" class="btn btn--action-primary" target="_blank" rel="noopener noreferrer" data-config-key="browse_store">
+                Browse Global Store
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a href="https://discord.gg/dVrff77YfK" class="btn btn--action-secondary" target="_blank" rel="noopener noreferrer" data-config-key="discord_link">
+                Community Hub
+              </a>
+            </div>
+
+            <div class="rating-vibe">
+              <div class="rating-vibe__stars">★★★★★</div>
+              <span class="rating-vibe__text">4.9/5 Elite Global Rating</span>
+            </div>
+          </div>
+
+          <div class="hero-showcase__media">
+            <div class="video-container-card">
+              <iframe id="hero-youtube" width="560" height="315" src="https://www.youtube.com/embed/yoxel4hymFA"
+                title="YouTube video player" frameborder="0" data-config-key="youtube_video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FF APK Section -->
+    <section id="apk" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">Secure Core Build</span>
+        <h2>FreeFire <span class="text-gradient">Bypass APKs</span></h2>
+        <p>Premium optimization layers engineered matching your primary client build architecture.</p>
+      </div>
+      
+      <div class="premium-grid">
+        <!-- Card 1 -->
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="ff.logo.png" alt="Free Fire" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Nexora P64 APK</h3>
+              <span class="status-tag tag--green">FF UPDATED</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Architecture</span><span class="val">V7A LITE</span></div>
+            <div class="spec-line"><span class="label">Core Engine</span><span class="val">Fully Optimized</span></div>
+            <div class="spec-line"><span class="label">Deployment</span><span class="val">External Panel</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/85m1d2thc9l5epd/FREE_FIRE_PANEL_AND_BYPASS_APK.xapk/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="external_p64_apk">
+            Secure Download
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="dynamic-card" data-neon="pink">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="ff.logo.png" alt="Free Fire" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>INTERNAL APK</h3>
+              <span class="status-tag tag--green">FF UPDATED</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Architecture</span><span class="val">V7A Build</span></div>
+            <div class="spec-line"><span class="label">Core Engine</span><span class="val">Fully Optimized</span></div>
+            <div class="spec-line"><span class="label">Deployment</span><span class="val">Internal Execution</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/yitntc414801999/FREE_FIRE_GOD_INTERNAL_APK.xapk/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="internal_bypass_apk">
+            Secure Download
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="dynamic-card" data-neon="blue">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="ff.logo.png" alt="BYPASS APK" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>UID BYPASS APK</h3>
+              <span class="status-tag tag--blue">BYPASS</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Build Tag</span><span class="val">BETA APK</span></div>
+            <div class="spec-line"><span class="label">Core Engine</span><span class="val">SECURE Safe-Guard</span></div>
+            <div class="spec-line"><span class="label">Version Status</span><span class="val">Latest Engine</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/yg2or9ww7xsw71j/FREE_FIRE_BETA_APK.xapk/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger btn--alt-color" data-config-key="beta_apk">
+            Secure Download
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emulator Setups Section -->
+    <section id="emulator" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">Engine Configurations</span>
+        <h2>Emulator <span class="text-gradient">Optimization</span></h2>
+        <p>Prevent system-level runtime micro-stutters, frame drop intervals, and polling sensory desyncs.</p>
+      </div>
+
+      <div class="premium-grid">
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="msi.logo.png" alt="MSI" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>MSI App Player</h3>
+              <span class="status-tag tag--gold">RECOMMENDED</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Performance</span><span class="val">Elite Optimization</span></div>
+            <div class="spec-line"><span class="label">Platform Matrix</span><span class="val">Windows OS</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/vujf104862thne6/MSI_APP_PALYER.exe/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="msi_player">Download Build</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="cyan">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="bluestacks_logo.jpg" alt="BlueStacks" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>BlueStacks 5</h3>
+              <span class="status-tag tag--blue">LATEST BUILD</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Performance</span><span class="val">Max Throughput</span></div>
+            <div class="spec-line"><span class="label">Version Tag</span><span class="val">v5.14.22 Engine</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/wso64d71kuamck6/BlueStacks_App_Player.exe/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="bluestacks_player">Download Build</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="amber">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="Memu.png" alt="MEmu Player"></div>
+            <div class="dynamic-card__title-area">
+              <h3>MEmu Player</h3>
+              <span class="status-tag tag--purple">STABLE ECO</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Performance</span><span class="val">High Framework</span></div>
+            <div class="spec-line"><span class="label">Compatibility</span><span class="val">Low-End PC Array</span></div>
+          </div>
+          <a href="https://www.mediafire.com/file/8vcbcjn2rauazfn/memu+update.exe/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="memu_player">Download Build</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Panel Section -->
+    <section id="free-panel" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">Public Community Matrix</span>
+        <h2>Free Tier <span class="text-gradient">Software</span></h2>
+        <p>Experience baseline deployment mechanics from our optimized execution framework panels.</p>
+      </div>
+
+      <div class="premium-grid premium-grid--two-col">
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="grandmaster.png" alt="Free Panel" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Free PC Panel</h3>
+              <span class="status-tag tag--standard">COMMUNITY</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Build Identifier</span><span class="val">Nexora Free Panel</span></div>
+            <div class="spec-line"><span class="label">Current Status</span><span class="val" data-config-key="free_panel_status">Available</span></div>
+          </div>
+          <a href="#" class="btn btn--card-trigger" data-config-key="free_panel">Deploy Software</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="cyan">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="bypass.png" alt="Free Bypass" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Free UID Bypass</h3>
+              <span class="status-tag tag--standard">COMMUNITY</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Target Hook</span><span class="val">Emulator Registry</span></div>
+            <div class="spec-line"><span class="label">Current Status</span><span class="val" data-config-key="free_bypass_status">Available</span></div>
+          </div>
+          <a href="#" class="btn btn--card-trigger" data-config-key="free_bypass">Deploy Software</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paid Sensi Section -->
+    <section id="paid-sensi" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">Elite Execution Layer</span>
+        <h2>Paid Sensi <span class="text-gradient">& Tuning</span></h2>
+        <p>Deploy specialized custom pixel-matching engine arrays used at high-competitive tiers.</p>
+      </div>
+
+      <div class="premium-grid">
+        <div class="dynamic-card" data-neon="teal">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="OPTIMIZATION LOGO.png" alt="Optimization File" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>System Optimization</h3>
+              <span class="status-tag tag--blue">6 CONFS</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Data Payload</span><span class="val">6 Precision Scripts</span></div>
+            <div class="spec-line"><span class="label">Matrix Target</span><span class="val">OS Threading Latency</span></div>
+          </div>
+          <button class="btn btn--card-trigger">Download Configurations</button>
+        </div>
+
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="DRIVER BOSSTER LOGO.png" alt="Driver Booster" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Driver Booster Core</h3>
+              <span class="status-tag tag--gold">ESSENTIAL</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Payload</span><span class="val">1 Automated Package</span></div>
+            <div class="spec-line"><span class="label">Operation</span><span class="val">Kernel Interceptors Optimizer</span></div>
+          </div>
+          <button class="btn btn--card-trigger">Inject Driver Fixes</button>
+        </div>
+
+        <div class="dynamic-card" data-neon="red">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="PAID SENSI LOGO.png" alt="Paid Sensi" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Paid Sensi Matrix</h3>
+              <span class="status-tag tag--red">ELITE CORE</span>
+            </div>
+          </div>
+          <div class="dynamic-card__specs">
+            <div class="spec-line"><span class="label">Engine Sync</span><span class="val">Files + Calibration Values</span></div>
+            <div class="spec-line"><span class="label">Hit Tracking</span><span class="val">Pixel Engine Adaptive</span></div>
+          </div>
+          <button class="btn btn--card-trigger btn--alt-color">Download Elite Sensi</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirements & Errors Section -->
+    <section id="panel-driver" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">Dependency Array Resolver</span>
+        <h2>Panel <span class="text-gradient">Error Resolution</span></h2>
+        <p>Ensure correct architecture runtime installations to initialize system injection hooks flawlessly.</p>
+      </div>
+
+      <div class="premium-grid">
+        <!-- Dependency Cards -->
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="Panel Runtime Logo.png" alt="Panel Runtime" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>C++ Runtime Redist</h3>
+              <span class="status-tag tag--gold">REQUIRED</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/kq5wgl8igtan6nx/PANEL+RUNTIME.Rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="panel_runtime">Download v2.0.0</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="cyan">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="DIRECT X LOGO.png" alt="Direct X" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>DirectX Legacy Core</h3>
+              <span class="status-tag tag--red">CRITICAL</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/6u7i739zaivu0ik/dxwebsetup.exe/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="dx_setup">Download Runtime</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="blue">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="dotnet logo.png" alt="Dotnet" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Runtime .NET SDK</h3>
+              <span class="status-tag tag--blue">FRAMEWORK</span>
+            </div>
+          </div>
+          <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-10.0.300-windows-x64-installer" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="dotnet_sdk">Download SDK</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="blue">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="WINDRIVER , CHARMS , D3D COMPLILER , MEMORY DLL.png" alt="Windriver Fix" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>WinDivert API Fix</h3>
+              <span class="status-tag tag--blue">DLL INJECTOR</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/bckc5cgapaeidy9/WinDivert.dll_Error_Fix...%2521.Rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="windivert_fix">Download API DLL</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="blue">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="WINDRIVER , CHARMS , D3D COMPLILER , MEMORY DLL.png" alt="Charms Fix" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>OpenGL Rendering Fix</h3>
+              <span class="status-tag tag--blue">SYSTEM DLL</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/wlqm5jsk4fvbrie/opengl32.dll/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="opengl_dll">Download opengl32</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="winrar logo.png" alt="WinRAR" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>WinRAR Extractor</h3>
+              <span class="status-tag tag--standard">UTILITY</span>
+            </div>
+          </div>
+          <a href="https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="winrar_download">Download Archive</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other Issues & Patches Section -->
+    <section id="other-issues" class="page">
+      <div class="section-title-block">
+        <span class="section-title-block__caption">System Environment Patches</span>
+        <h2>Advanced <span class="text-gradient">Fix Array</span></h2>
+        <p>Resolve virtualization conflicts, port mapping blocks, and compiler engine error exceptions.</p>
+      </div>
+
+      <div class="premium-grid">
+        <div class="dynamic-card" data-neon="cyan">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="hyper v logo.png" alt="HD Disable Hyper V" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Hyper-V Native Disabler</h3>
+              <span class="status-tag tag--red">VIRTUAL FIX</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/825ooh81yz20n90/HD-DisableHyperV_native_v2.rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="disable_hyperv">Apply Patch</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            </div>
+            <div class="dynamic-card__title-area">
+              <h3>Network Framework Patch</h3>
+              <span class="status-tag tag--blue">NET RUNTIME</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/yt2mwcz5l8c5fk3/NDP481-x86-x64-AllOS-ENU.rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="dotnet_framework">Apply Patch</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="pink">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="WINDRIVER , CHARMS , D3D COMPLILER , MEMORY DLL.png" alt="D3D Compiler" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>D3DCompiler Overlay Fix</h3>
+              <span class="status-tag tag--gold">DIRECTX RENDER</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/hc5ahy0ai4ea8ev/D3DCOMPILER+FIXED.zip/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="d3dcompiler_fix">Apply Patch</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="orange">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="proxy disc. logo.png" alt="Disconnect Proxy Bypass" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Proxy Disconnect Reset</h3>
+              <span class="status-tag tag--red">BYPASS SYNC</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/nmjn3zk2avimdzc/Proxy+Disconnect.rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="proxy_disconnect">Apply Patch</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="purple">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="WINDRIVER , CHARMS , D3D COMPLILER , MEMORY DLL.png" alt="Memory DLL Issue Fix" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>Memory Leak Allocation Fix</h3>
+              <span class="status-tag tag--blue">ALLOCATION MEM</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/dv6dvjt4b0wgfd1/memory_dll_issue_fix.rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="memory_dll_fix">Apply Patch</a>
+        </div>
+
+        <div class="dynamic-card" data-neon="cyan">
+          <div class="dynamic-card__header">
+            <div class="dynamic-card__icon-box"><img src="adb logo.png" alt="ADB Fix" /></div>
+            <div class="dynamic-card__title-area">
+              <h3>ADB Bridge Port Mapper</h3>
+              <span class="status-tag tag--blue">BRIDGE FIX</span>
+            </div>
+          </div>
+          <a href="https://www.mediafire.com/file/r09j8q5wq9km8el/FixAdbPorts.rar/file" target="_blank" rel="noopener noreferrer" class="btn btn--card-trigger" data-config-key="fix_adb_ports">Apply Patch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- High-End Cyberpunk Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__top">
+        <div class="footer__branding">
+          <a href="#home" class="footer__logo">
+            <img src="logo.png" alt="Nexora Logo" class="logo-img">
+            <div class="logo-text">
+              <span class="logo-name">NEXORA<span class="text-gradient">CORP</span></span>
+              <span class="logo-sub">SECURE INTEGRATED NETWORK</span>
+            </div>
+          </a>
+          <p class="footer__desc">A secure private infrastructure engineered for performance tuning, optimized routing mechanics, and software integrity monitoring systems.</p>
+          
+          <div class="footer__socials">
+            <a href="https://discord.gg/dVrff77YfK" target="_blank" class="social-icon" aria-label="Discord" data-config-key="discord_link">
+              <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.39,80.21a105.73,105.73,0,0,0,32.77,16.15,77.7,77.7,0,0,0,7.32-11.85,67.35,67.35,0,0,1-11.35-5.43c.95-.69,1.89-1.42,2.78-2.17a74.43,74.43,0,0,0,63.48,0c.89.75,1.83,1.48,2.78,2.17a67.43,67.43,0,0,1-11.35,5.43,77.91,77.91,0,0,0,7.32,11.85,105.56,105.56,0,0,0,32.8-16.15C129.58,52.41,124.4,28.85,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.43-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            </a>
+            <a href="https://wa.me/8801331574466" target="_blank" class="social-icon" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.353-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.131.574-.072 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.397.015 12.03c0 2.12.553 4.189 1.606 6.06L0 24l6.117-1.605a11.803 11.803 0 005.925 1.585h.005c6.635 0 12.032-5.396 12.035-12.032a11.77 11.77 0 00-3.489-8.452z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@Nexora_Corporation" target="_blank" class="social-icon" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__links-group">
+          <h4 class="footer__links-title">NAVIGATE</h4>
+          <ul class="footer__links">
+            <li><a href="https://discord.gg/dVrff77YfK" target="_blank" data-config-key="discord_link">About Engine</a></li>
+            <li><a href="https://discord.gg/dVrff77YfK" target="_blank" data-config-key="discord_link">System Specs</a></li>
+            <li><a href="https://discord.gg/dVrff77YfK" target="_blank" data-config-key="discord_link">FAQ Registry</a></li>
+          </ul>
+        </div>
+        <div class="footer__links-group">
+          <h4 class="footer__links-title">COMPLIANCE</h4>
+          <ul class="footer__links">
+            <li><a href="https://discord.gg/dVrff77YfK" target="_blank" data-config-key="discord_link">Terms of Service</a></li>
+            <li><a href="https://discord.gg/dVrff77YfK" target="_blank" data-config-key="discord_link">Security Matrix</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 NEXORA CORPORATION. All rights reserved.</p>
+        <div class="footer__network-status">
+          <span class="status-indicator-dot"></span> ENCRYPTED LINK SECURE
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Mechanism Area -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <div class="toast__icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+    </div>
+    <div class="toast__content">
+      <strong class="toast__title">System Broadcast</strong>
+      <p class="toast__message"></p>
+    </div>
+    <button class="toast__close" type="button" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <!-- Optimized Responsive Loader Script -->
+  <script>
+    (function () {
+      const loader = document.getElementById('loader');
+      if (!loader) return;
+      const duration = 1000; 
+      const ring = loader.querySelector('.loader__ring-progress');
+      if (ring) {
+        ring.style.animation = 'none';
+        ring.style.strokeDashoffset = '226';
+        ring.getBoundingClientRect(); 
+        ring.style.transition = 'stroke-dashoffset ' + duration + 'ms cubic-bezier(0.25, 1, 0.5, 1)';
+        ring.style.strokeDashoffset = '0';
+      }
+      setTimeout(function () {
+        loader.classList.add('loader--done');
+      }, duration);
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
